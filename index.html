@@ -3,11 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <title>Blog de NodeJS</title>
     <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+    href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    >
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="https://getbootstrap.com/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -60,14 +63,11 @@
   <div class="album py-5 bg-light">
     <div class="container">
      <div class="row" ng-controller="Rest">
-        <div class="col-md-4" ng-repeat="publicacao in publicacoes">
-          <div class="card mb-4 shadow-sm">
-            <img ng-src="{{ publicacao.thumbImage }}" >
-            <div class="card-body">
-              <p class="card-text">{{ publicacao.title }}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">{{ publicacao.description }}</small>
-              </div>
+      <div class="col-md-4" ng-repeat="publicacao in publicacoes">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <p class="card-text">{{ publicacao.titulo }}</p>
+            <small class="text-muted">{{ publicacao.conteudo }}</small>
             </div>
           </div>
         </div>
