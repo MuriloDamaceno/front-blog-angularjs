@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
-    <title>Blog de NodeJS</title>
+    <title>Fio | Blog de tecnologia</title>
     <!-- Bootstrap core CSS -->
     <link
     href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css"
@@ -18,69 +18,109 @@
     <link rel="manifest" href="https://getbootstrap.com/docs/5.2/assets/img/favicons/manifest.json">
     <link rel="mask-icon" href="https://getbootstrap.com/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
     <link rel="icon" href="https://getbootstrap.com/docs/5.2/assets/img/favicons/favicon.ico">
-    <link href="https://getbootstrap.com/docs/4.6/examples/album/album.css" rel="stylesheet">
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+      .bd-placeholder-img { font-size: 1.125rem; text-anchor: middle; user-select: none; }
+      .nav-links { display: flex; gap: 18px; align-items: center; }
+      .nav-links a { color: rgba(255,255,255,.75); font-size: .9rem; }
+      .nav-links a:hover, .nav-links .active { color: #fff; }
+      .content { max-width: 960px; margin: auto; }
+      .hero { padding: 48px 0; background: #f8f9fa; text-align: center; }
+      .hero h1 { font-size: 2.5rem; }
+      .eyebrow, .meta { color: #6c757d; font-size: .78rem; text-transform: uppercase; }
+      .section { padding: 48px 0; }
+      .section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+      .section-heading h2 { margin-bottom: 0; }
+      .post-grid { display: flex; flex-wrap: wrap; margin: 0 -8px; }
+      .post-card { width: calc(33.333% - 16px); margin: 8px; min-height: 220px; padding: 20px; background: #fff; border: 1px solid rgba(0,0,0,.125); border-radius: .25rem; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); display: flex; flex-direction: column; }
+      .post-card h3 { margin: 16px 0 10px; font-size: 1.25rem; }
+      .post-card p { color: #6c757d; flex: 1; }
+      .read-more { color: #0d6efd; }
+      .button { display: inline-block; border: 1px solid #212529; border-radius: .25rem; background: #212529; color: #fff; padding: .375rem .75rem; font-size: 1rem; cursor: pointer; }
+      .button:hover { background: #424649; color: #fff; }
+      .button.secondary { background: #fff; color: #212529; }
+      .detail, .form-wrap { max-width: 760px; padding: 48px 0; }
+      .detail h1 { font-size: 2.5rem; }
+      .detail-copy { color: #495057; font-size: 1.1rem; line-height: 1.7; white-space: pre-line; }
+      label { display: block; margin: 16px 0 6px; font-weight: 600; }
+      input, textarea { width: 100%; border: 1px solid #ced4da; border-radius: .25rem; padding: .5rem .75rem; }
+      textarea { min-height: 180px; }
+      .notice { padding: 12px; margin-bottom: 16px; background: #d1e7dd; }
+      .error { padding: 12px; margin-bottom: 16px; color: #842029; background: #f8d7da; }
+      .category-list { display: flex; flex-wrap: wrap; gap: 12px; }
+      .category { padding: 14px 20px; background: #fff; border: 1px solid rgba(0,0,0,.125); border-radius: .25rem; }
+      footer { padding: 24px 0; color: #6c757d; background: #f8f9fa; }
+      @media (max-width: 767px) { .post-card { width: calc(100% - 16px); } .nav-inner { padding-top: 12px; padding-bottom: 12px; } .nav-links { flex-wrap: wrap; gap: 10px; } }
     </style>
 
   </head>
   <body>
+<body ng-controller="BlogController">
 <header>
   <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <strong> Blog em NodeJS</strong>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div class="container d-flex justify-content-between align-items-center">
+    <a href="#/inicio" class="navbar-brand"><strong>Blog em NodeJS</strong></a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#/inicio" ng-class="{active: pagina === 'inicio'}">Postagens</a>
+      <a href="#/categorias" ng-class="{active: pagina === 'categorias'}">Categorias</a>
+      <a href="#/nova-categoria">Nova categoria</a>
+    </nav>
     </div>
   </div>
 </header>
 
-<main role="main">
-
-  <section class="jumbotron text-center">
+<main>
+  <section class="hero" ng-if="pagina === 'inicio'">
     <div class="container">
       <h1>Consumindo a API REST do Blog</h1>
-      <p class="lead text-muted"></p>
+      <p class="lead text-muted">Confira as publicações disponíveis.</p>
     </div>
   </section>
 
-  <div class="album py-5 bg-light">
-    <div class="container">
-     <div class="row" ng-controller="Rest">
-      <div class="col-md-4" ng-repeat="publicacao in publicacoes">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-body">
-            <p class="card-text">{{ publicacao.titulo }}</p>
-            <small class="text-muted">{{ publicacao.conteudo }}</small>
-            </div>
-          </div>
-        </div>
+  <div class="content">
+    <section class="section album bg-light" ng-if="pagina === 'inicio'">
+      <div class="section-heading"><h2>Últimas postagens</h2><span class="meta">{{ publicacoes.length }} publicações</span></div>
+      <div class="error" ng-if="erro">{{ erro }}</div>
+      <p ng-if="carregando">Carregando publicações...</p>
+      <div class="post-grid" ng-if="!carregando">
+        <article class="post-card" ng-repeat="publicacao in publicacoes">
+          <div class="meta">{{ publicacao.categoria || 'geral' }}</div>
+          <h3>{{ publicacao.titulo || publicacao.title }}</h3>
+          <p>{{ (publicacao.conteudo || publicacao.description) | limitTo:140 }}{{ (publicacao.conteudo || publicacao.description).length > 140 ? '...' : '' }}</p>
+          <a class="read-more" href="#/postagem/{{ publicacao.id }}">Ler postagem &rarr;</a>
+        </article>
       </div>
-    </div>
-  </div>
+      <p ng-if="!carregando && !publicacoes.length">Nenhuma postagem encontrada.</p>
+    </section>
 
-</main>
-<footer class="text-muted">
-  <div class="container">
-    <p>Usei o modelo do Bootstrap</p>
+    <section class="detail" ng-if="pagina === 'detalhe'">
+      <div class="error" ng-if="erro">{{ erro }}</div>
+      <p class="meta">{{ postagem.categoria || 'geral' }}</p>
+      <h1>{{ postagem.titulo || postagem.title }}</h1>
+      <p class="detail-copy">{{ postagem.conteudo || postagem.description }}</p>
+      <button class="button" ng-click="editar(postagem)">Editar postagem</button>
+      <a class="button secondary" href="#/inicio">Voltar</a>
+    </section>
+
+    <section class="section" ng-if="pagina === 'categorias'">
+      <div class="section-heading"><h2>Categorias</h2><a class="button" href="#/nova-categoria">Adicionar</a></div>
+      <div class="error" ng-if="erro">{{ erro }}</div><div class="notice" ng-if="mensagem">{{ mensagem }}</div>
+      <p ng-if="carregando">Carregando categorias...</p>
+      <div class="category-list" ng-if="!carregando"><div class="category" ng-repeat="categoria in categorias">{{ categoria.nome }}</div></div>
+    </section>
+
+    <section class="form-wrap" ng-if="pagina === 'editar'">
+      <p class="eyebrow">Editar postagem</p><h2>Atualize o que mudou.</h2>
+      <div class="error" ng-if="erro">{{ erro }}</div>
+      <form ng-submit="salvarEdicao()"><label for="titulo">Título</label><input id="titulo" ng-model="formulario.titulo" required><label for="conteudo">Conteúdo</label><textarea id="conteudo" ng-model="formulario.conteudo" required></textarea><label for="categoria">Categoria</label><input id="categoria" ng-model="formulario.categoria"><br><br><button class="button" type="submit">Salvar alterações</button> <a class="button secondary" href="#/inicio">Cancelar</a></form>
+    </section>
+
+    <section class="form-wrap" ng-if="pagina === 'nova-categoria'">
+      <p class="eyebrow">Organização</p><h2>Crie uma nova categoria.</h2>
+      <div class="error" ng-if="erro">{{ erro }}</div>
+      <form ng-submit="salvarCategoria()"><label for="nome">Nome da categoria</label><input id="nome" ng-model="novaCategoria.nome" placeholder="ex.: design" required><br><br><button class="button" type="submit">Criar categoria</button> <a class="button secondary" href="#/categorias">Cancelar</a></form>
+    </section>
   </div>
-</footer>  
-    <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js" ></script>
+</main>
+<footer><div class="content">FIO / BLOG CONECTADO À API REST</div></footer>
   </body>
 </html>
