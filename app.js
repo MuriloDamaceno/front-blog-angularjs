@@ -1,6 +1,6 @@
 angular.module('blog', [])
   .controller('BlogController', function ($scope, $http, $window) {
-    var api = 'https://api-fake-blog-1.onrender.com';
+    var api = 'https://api-fake-blog-xlic.onrender.com';
 
     $scope.publicacoes = [];
     $scope.categorias = [];
