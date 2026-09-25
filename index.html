@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
-    <title>Fio | Blog de tecnologia</title>
+    <title>DevBlog Murilo | Notícias de tecnologia</title>
     <!-- Bootstrap core CSS -->
     <link
     href="https://getbootstrap.com/docs/5.2/dist/css/bootstrap.min.css"
@@ -34,9 +34,9 @@
       .post-card { width: calc(33.333% - 16px); margin: 8px; min-height: 220px; padding: 20px; background: #fff; border: 1px solid rgba(0,0,0,.125); border-radius: .25rem; box-shadow: 0 .125rem .25rem rgba(0,0,0,.075); display: flex; flex-direction: column; }
       .post-card h3 { margin: 16px 0 10px; font-size: 1.25rem; }
       .post-card p { color: #6c757d; flex: 1; }
-      .read-more { color: #0d6efd; }
-      .button { display: inline-block; border: 1px solid #212529; border-radius: .25rem; background: #212529; color: #fff; padding: .375rem .75rem; font-size: 1rem; cursor: pointer; }
-      .button:hover { background: #424649; color: #fff; }
+      .read-more { color: #198754; }
+      .button { display: inline-block; border: 1px solid #1b3a2f; border-radius: .25rem; background: #1b3a2f; color: #fff; padding: .375rem .75rem; font-size: 1rem; cursor: pointer; }
+      .button:hover { background: #2d5c49; color: #fff; }
       .button.secondary { background: #fff; color: #212529; }
       .detail, .form-wrap { max-width: 760px; padding: 48px 0; }
       .detail h1 { font-size: 2.5rem; }
@@ -56,9 +56,9 @@
   <body>
 <body ng-controller="BlogController">
 <header>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
+  <div class="navbar navbar-dark shadow-sm" style="background:#1b3a2f;">
     <div class="container d-flex justify-content-between align-items-center">
-    <a href="#/inicio" class="navbar-brand"><strong>Blog em NodeJS</strong></a>
+    <a href="#/inicio" class="navbar-brand"><strong>DevBlog Murilo</strong></a>
     <nav class="nav-links" aria-label="Navegação principal">
       <a href="#/inicio" ng-class="{active: pagina === 'inicio'}">Postagens</a>
       <a href="#/categorias" ng-class="{active: pagina === 'categorias'}">Categorias</a>
